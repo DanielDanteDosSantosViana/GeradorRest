@@ -8,6 +8,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import br.com.geradorrest.domain.Localizacao;
 import br.com.geradorrest.domain.Pais;
 import br.com.geradorrest.domain.Unidade;
 import br.com.geradorrest.domain.factory.FactoryObjects;
@@ -18,11 +19,13 @@ public class RecursoLocalizacaoJSON {
 	@Path("/pais")
 	@Produces(MediaType.APPLICATION_JSON)
 	@GET
-	public List<Pais> getTodosPaises(){
+	public Localizacao getTodosPaises(){
 		try{
 		
 			List<Pais> paises = FactoryObjects.obtemTodosPaises();
-			return paises;
+			Localizacao localizacao = new Localizacao();
+			localizacao.setPais(paises);
+			return localizacao;
 		
 		}catch(Exception e){
 			System.out.println(e.getMessage());
