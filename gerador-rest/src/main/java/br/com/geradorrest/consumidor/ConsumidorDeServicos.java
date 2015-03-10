@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.com.geradorrest.service.PaisService;
 import br.com.geradorrest.service.PessoaService;
+import br.com.geradorrest.service.dto.DocumentoPessoaDTO;
 import br.com.geradorrest.service.dto.PaisDTO;
 import br.com.geradorrest.service.dto.PessoaDTO;
 import br.com.geradorrest.service.dto.PessoaFisicaDTO;
@@ -25,15 +26,22 @@ public class ConsumidorDeServicos {
 		return new PessoaService().getPessoaJuridicaPorNumeroCNPJ("2073");
 		
 	}
+	
+	public DocumentoPessoaDTO consomeDocumentoPessoa(){
+		return new PessoaService().getDocumentoPessoaPorIdPessoa("1");
+		
+	}
 
 	public static void main(String[] args) {
 		ConsumidorDeServicos consumidor = new ConsumidorDeServicos();
 		
+		DocumentoPessoaDTO documentoPessoaDTO = consumidor.consomeDocumentoPessoa();
 		PessoaDTO  pessoaDTO = consumidor.consomePessoasEndereco();
 		PessoaFisicaDTO  pessoaFisicaDTO = consumidor.consomePessoasFisica();
 		PessoaJuridicaDTO  pessoaJuridicaDTO = consumidor.consomePessoasJuridica();
 		List<PaisDTO>  paises = consumidor.consomeTodosPaises();
 		
+		System.out.println(documentoPessoaDTO.getIdPessoa());
 		System.out.println(pessoaDTO.getIdPessoa());
 		System.out.println(pessoaFisicaDTO.getId());
 		System.out.println(pessoaJuridicaDTO.getId());
