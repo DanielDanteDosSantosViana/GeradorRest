@@ -1,11 +1,8 @@
 package br.com.geradorrest;
 
-import java.io.IOException;
 import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.ws.rs.ext.ContextResolver;
 
@@ -19,11 +16,9 @@ import org.glassfish.jersey.server.ResourceConfig;
  *
  */
 public class Main {
-    public static final String BASE_URI = "http://localhost:3000/gerador-rest/";
-
-    public static HttpServer startServer() {
+    public static HttpServer startServer(String ip,String porta) {
     	System.out.println("Gerador REST - Iniciando ...");
-        return GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), createApp());
+        return GrizzlyHttpServerFactory.createHttpServer(URI.create("http://"+ip+":"+porta+"/gerador-rest/"), createApp());
     }
 
     /**
@@ -32,17 +27,35 @@ public class Main {
      */
     public static void main(String[] args) {
         
-    	try{
-
-    		final HttpServer server = startServer();
-	        System.out.println(String.format("applicação Gerador-REST está rodando. Acesse  ", BASE_URI));
-	        System.in.read();
-	        server.shutdown();
-    	
-    	}catch(IOException e){
+    	if(args.length!=2){
     		
-    		Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, e);
+    	      System.err.println("Erro na chamada do comando.");
+              System.err.println("Uso: java -jar NOME_DO_JAR [IP_SERVIDOR] [PORTA]");
+              System.exit(1);
     	}
+    	
+    	final HttpServer server = startServer(args[0],args[1]);
+    	
+        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+            @Override
+            public void run() {
+        		System.out.println("Aplicacao saindo ...");
+                server.shutdown();
+            }
+        }, "shutdownHook"));
+        
+    	try {
+    		server.start();
+    		System.out.println(String.format("applicação Gerador-REST está rodando. Acesse  ", args[0]+":"+args[1]+"gerador-rest/"));
+    		System.out.println("Press CTRL^C to exit..");
+    	    Thread.currentThread().join();
+    	    } catch (Exception ioe) {
+    	    	server.shutdown();
+    	        System.err.println(ioe);
+    	    }
+     
+    			
+    		
     }
 
     public static ResourceConfig createApp() {
