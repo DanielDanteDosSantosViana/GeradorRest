@@ -54,4 +54,5 @@ public class PessoaFisica {
 	public void setResidencia(Residencia residencia) {
 		this.residencia = residencia;
 	}
+	
 }

@@ -6,6 +6,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import br.com.geradorrest.domain.DocumentoPessoa;
 import br.com.geradorrest.domain.Pessoa;
 import br.com.geradorrest.domain.PessoaFisica;
 import br.com.geradorrest.domain.PessoaJuridica;
@@ -45,6 +46,22 @@ public class RecursoPessoaJSON {
 		return null;
 		
 	}
+	
+	@Path("/fisica/{idPessoa}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@GET
+	public PessoaFisica getPessoaFisicaPeloId(@PathParam("idPessoa") String idPessoa){
+		try{
+			PessoaFisica pessoaFisica = FactoryObjects.getPessoaFisicaPorId(idPessoa);
+			return pessoaFisica;
+		}catch(Exception e){
+			
+			System.out.println(e.getMessage());
+		}
+		
+		return null;
+		
+	}
 
 	@Path("/juridica/cnpj/{numero_cnpj}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -53,6 +70,38 @@ public class RecursoPessoaJSON {
 		try{
 			PessoaJuridica pessoaJuridica = FactoryObjects.getPessoaJuridicaPorCNPJ(numeroCnpj);
 			return pessoaJuridica;
+		}catch(Exception e){
+			
+			System.out.println(e.getMessage());
+		}
+		
+		return null;
+		
+	}
+	
+	@Path("/juridica/{idPessoa}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@GET
+	public PessoaJuridica getPessoaJuridicaPeloNumeroId(@PathParam("idPessoa") String idPessoa){
+		try{
+			PessoaJuridica pessoaJuridica = FactoryObjects.getPessoaJuridicaPorId(idPessoa);
+			return pessoaJuridica;
+		}catch(Exception e){
+			
+			System.out.println(e.getMessage());
+		}
+		
+		return null;
+		
+	}
+	
+	@Path("/{idPessoa}/documento")
+	@Produces(MediaType.APPLICATION_JSON)
+	@GET
+	public DocumentoPessoa getDocumentoPessoa(@PathParam("idPessoa") String idPessoa){
+		try{
+			DocumentoPessoa documentoPessoa = FactoryObjects.obterDocumentoPorIdPessoa(idPessoa);
+			return documentoPessoa;
 		}catch(Exception e){
 			
 			System.out.println(e.getMessage());

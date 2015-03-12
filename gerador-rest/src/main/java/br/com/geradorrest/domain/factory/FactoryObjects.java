@@ -5,6 +5,11 @@ import java.util.Date;
 import java.util.List;
 
 import br.com.geradorrest.domain.ControleAcesso;
+<<<<<<< HEAD
+=======
+import br.com.geradorrest.domain.Documento;
+import br.com.geradorrest.domain.DocumentoPessoa;
+>>>>>>> 9c13615c8cb0149f0d2bcc20000dccb42e47a3d1
 import br.com.geradorrest.domain.Endereco;
 import br.com.geradorrest.domain.Grupo;
 import br.com.geradorrest.domain.Municipio;
@@ -53,7 +58,7 @@ public class FactoryObjects {
 		return pessoa;
 	}
 
-	public static PessoaFisica getPessoaFisicaPorCPF(String idPessoa){
+	public static PessoaFisica getPessoaFisicaPorCPF(String numeroCpf){
 		
 		
 		Pais pais = new Pais(new Long(1),"BRASIL","BRA");
@@ -62,6 +67,28 @@ public class FactoryObjects {
 		
 		PessoaFisica pessoaFisica = new PessoaFisica();
 		pessoaFisica.setId("2073");
+		pessoaFisica.setNome("DANIEL DANTE DOS SANTOS VIANA");
+		pessoaFisica.setNomeArtistico("DANTE");
+		pessoaFisica.setDataNascimento(new Date());
+		pessoaFisica.setNumeroAgenteEconomico("3689");
+		pessoaFisica.setResidencia(residencia);
+		pessoaFisica.setNacionalidade(nacionalidade);
+		 
+		
+		
+		
+		return pessoaFisica;
+	}
+	
+public static PessoaFisica getPessoaFisicaPorId(String id){
+		
+		
+		Pais pais = new Pais(new Long(1),"BRASIL","BRA");
+		Residencia residencia = new Residencia(false,new Date(),pais);
+		Nacionalidade nacionalidade = new Nacionalidade(true,new Date());
+		
+		PessoaFisica pessoaFisica = new PessoaFisica();
+		pessoaFisica.setId(id);
 		pessoaFisica.setNome("DANIEL DANTE DOS SANTOS VIANA");
 		pessoaFisica.setNomeArtistico("DANTE");
 		pessoaFisica.setDataNascimento(new Date());
@@ -86,11 +113,27 @@ public class FactoryObjects {
 		pessoaJuridica.setNumeroAgenteEconomico("22448");
 		pessoaJuridica.setNaturezaJuridica(naturezaJuridica);
 		pessoaJuridica.setPais(pais);
-		pessoaJuridica.setId(numeroCnpj);
+		pessoaJuridica.setId("1111");
 		
 		return pessoaJuridica;
 	}
-
+	
+public static PessoaJuridica getPessoaJuridicaPorId(String id) {
+		
+		NaturezaJuridica naturezaJuridica = new NaturezaJuridica(null,null,"Sociedade de quotas de responsabilidade limitada");
+		Pais pais = new Pais(new Long(2),"ESTADOS UNIDOS","USA");
+		PessoaJuridica pessoaJuridica = new PessoaJuridica();
+		pessoaJuridica.setDataConstituicao(new Date());
+		pessoaJuridica.setNome("DANIEL PROGRAMING");
+		pessoaJuridica.setNomeFantasia("BRASIL PROGRAMING");
+		pessoaJuridica.setNumeroAgenteEconomico("22448");
+		pessoaJuridica.setNaturezaJuridica(naturezaJuridica);
+		pessoaJuridica.setPais(pais);
+		pessoaJuridica.setId(id);
+		
+		return pessoaJuridica;
+	}
+	
 	public static List<Pais> obtemTodosPaises() {
 		Pais paisBR = new Pais(new Long(1),"BRASIL","BR");
 		Pais paisUSA = new Pais(new Long(2),"ESTADOS UNIDOS","USA");
@@ -116,8 +159,13 @@ public class FactoryObjects {
 		unidades.add(unidadeRio);
 		unidades.add(unidadeSaoPaulo);
 		unidades.add(unidadeBahia);
+<<<<<<< HEAD
 		
 		
+=======
+		
+		
+>>>>>>> 9c13615c8cb0149f0d2bcc20000dccb42e47a3d1
 		Pais pais = new Pais(new Long(idPais),idPais,idPais);
 		pais.setUnidades(unidades);
 		
@@ -175,4 +223,48 @@ public class FactoryObjects {
 		
 		return grupo1;
 	}
+<<<<<<< HEAD
+=======
+	
+	public static DocumentoPessoa obterDocumentoPorIdPessoa(String idPessoa){
+		
+		Documento documento = new Documento();
+		
+		documento.setId("11111111111");
+		documento.setDtEmissao(new Date().toString());
+		Municipio municipio = new Municipio(new Long(2487), "Rio De Janeiro");
+		Unidade unidade = new Unidade(new Long(5),"RIO DE JANEIRO","RJ");
+		Pais pais = new Pais(new Long(1),"BRASIL","BRA");
+
+		documento.setMunicipio(municipio);
+		documento.setUnidade(unidade);
+		documento.setPais(pais);
+		documento.setTipo("CPF");
+		
+		Documento documentoCNPJ = new Documento();
+		
+		documentoCNPJ.setId("11111111111111");
+		documentoCNPJ.setDtEmissao(new Date().toString());
+		Municipio municipioCNPJ = new Municipio(new Long(2487), "Rio De Janeiro");
+		Unidade unidadeCNPJ = new Unidade(new Long(5),"RIO DE JANEIRO","RJ");
+		Pais paisCNPJ = new Pais(new Long(1),"BRASIL","BRA");
+
+		documentoCNPJ.setMunicipio(municipioCNPJ);
+		documentoCNPJ.setUnidade(unidadeCNPJ);
+		documentoCNPJ.setPais(paisCNPJ);
+		documentoCNPJ.setTipo("CNPJ");
+		
+		List<Documento> documentos = new ArrayList<Documento>();
+		documentos.add(documento);
+		documentos.add(documentoCNPJ);
+		
+		DocumentoPessoa documentoPessoa = new DocumentoPessoa();
+		
+		documentoPessoa.setDocumentos(documentos);
+		documentoPessoa.setIdPessoa(idPessoa);
+		
+		return documentoPessoa;
+	}
+
+>>>>>>> 9c13615c8cb0149f0d2bcc20000dccb42e47a3d1
 }
